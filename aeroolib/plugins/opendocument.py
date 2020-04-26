@@ -1017,7 +1017,7 @@ class OOSerializer:
                 next_child = new_parent_node
                 try:
                     while(True):
-                        curr_child = parent_children.next()
+                        curr_child = next(parent_children)
                         if curr_child.tag=='{%s}span' % namespaces['text'] and tag.text==curr_child.text:
                             new_span_node = EtreeElement('{%s}span' % namespaces['text'],
                                                 attrib=tag.attrib,
@@ -1047,14 +1047,14 @@ class OOSerializer:
                 try:
                     next_text = True
                     while(next_text):
-                        next_child = parent_children.next()
+                        next_child = next(parent_children)
                         curr_child.append(next_child)
                         next_text = next_child.text
                 except StopIteration:
                     pass
                 try:
                     while(True):
-                        next_child = parent_children.next()
+                        next_child = next(parent_children)
                         if not next_child.text:
                             curr_child.append(next_child)
                         else:
